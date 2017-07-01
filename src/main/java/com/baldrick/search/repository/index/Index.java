@@ -5,14 +5,14 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class Index {
-  protected final ConcurrentHashMap<String, ArrayList<String>> index;
+public class Index<T, F> {
+  protected final ConcurrentHashMap<T, ArrayList<F>> index;
   
   public Index() {
     this.index = new ConcurrentHashMap<>();
   }
   
-  public void add(String key, String value) {
+  public void add(T key, F value) {
     Optional<ArrayList> values = Optional.ofNullable(this.index.get(key));
     
     if (values.isPresent()) {
@@ -22,7 +22,7 @@ public class Index {
     }
   }
   
-  public Optional<ArrayList<String>> get(String key) {
+  public Optional<ArrayList<F>> get(T key) {
     return Optional.ofNullable(this.index.get(key));
   }
 }
